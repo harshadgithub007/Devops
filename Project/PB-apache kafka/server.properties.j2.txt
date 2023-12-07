@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+
+broker.id={{ inventory_hostname | regex_replace('\\D','') }}
+listeners=PLAINTEXT://{{ ansible_host }}:9092
+log.dirs={{ kafka_home }}/logs
+num.partitions=3
+zookeeper.connect={{ zookeeper_connection_string }}
+
+

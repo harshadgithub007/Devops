@@ -1,0 +1,27 @@
+---
+- name: Install and Configure Redis
+  hosts: your_redis_servers
+  become: yes
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Redis server
+      apt:
+        name: redis-server
+        state: present
+
+    - name: Copy custom Redis configuration file
+      copy:
+        src: /path/to/your/redis.conf
+        dest: /etc/redis/redis.conf
+        mode: 0644
+      notify:
+        - Restart Redis
+
+  handlers:
+    - name: Restart Redis
+      systemd:
+        name: redis-server
+        state: restarted

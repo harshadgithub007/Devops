@@ -1,0 +1,16 @@
+provider "aws" {
+  region     = "ap-south-1"
+  access_key = "AKIA3IPKX7I5SX2OEA6S"
+  secret_key = "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"
+}
+
+resource "aws_instance" "test" {
+  ami           = "ami-0287a05f0ef0e9d9a"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+
+******** we should hae to give the access permission for the IAM user who's keys are we using to create that resources*****

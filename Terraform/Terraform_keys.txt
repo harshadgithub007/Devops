@@ -1,0 +1,2 @@
+access_keys:- AKIA3IPKX7I5SX2OEA6S
+secret_keys:- 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

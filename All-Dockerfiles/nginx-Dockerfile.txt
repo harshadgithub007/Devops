@@ -1,0 +1,10 @@
+# Dockerfile for nginx
+
+FROM nginx:1.25.3-alpine
+MAINTAINER harshad105@gmail.com
+WORKDIR /app_nginx
+COPY nginx.config /etc/nginx/nginx.config
+ADD #any_link which is required to have in the application from the internet
+RUN apk update     #apk use due to the alpine images version
+EXPOSE 6937
+CMD ["nginx", "-g", "daemon off;"]

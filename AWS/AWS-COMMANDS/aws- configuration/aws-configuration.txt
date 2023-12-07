@@ -1,0 +1,10 @@
+1. aws --version ----------------- see version of the aws
+
+2. aws configure ---------------- to configuration details of the user
+
+3. this propmt will open ----->     AWS Access Key ID [None]: your-access-key-id
+			            AWS Secret Access Key [None]: your-secret-access-key 
+                                    Default region name [None]: your-region (e.g., us-east-1) 
+                                    Default output format [None]: json
+
+ 

@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    stages {
+        stage ('git_checkout) {
+            steps {
+                // git checkout url
+            }
+        }
+        stage ('create the python env') {
+            steps {
+                sh 'python3 -m venv venv'
+            }
+        }
+        stage ('activating the env') {
+            steps {
+                sh '. venv/bin/activate'
+            }
+        }
+        stage ('install dependancies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+        stage ('install test dependancies') {
+            steps {
+                sh 'pip install -r test-requirements.txt'
+            }
+        }
+        stage ('run test cases') {
+            steps {
+                sh 'python3 -m unittest discover -s tests'
+            }
+        }
+        stage ('python build') {
+            steps {
+                sh 'python setup.py sdist'
+            }
+        }
+        stage ('deactivating the virtual env') {
+            steps {
+                sh 'deactivate'
+            }
+        }
+      }
+}
