@@ -26,5 +26,9 @@ create the keys:-
 
 make connection to targeted server:-
 
-ssh ubuntu@IP_ADDRESS_OF_THE_TARGETED_SERVER
+ssh user@IP_ADDRESS_OF_THE_TARGETED_SERVER
 ***********************************************************************************
+passwordless authentication:-
+
+ssh-copy-id user@IP_ADDRESS
+**********************************************************************************
