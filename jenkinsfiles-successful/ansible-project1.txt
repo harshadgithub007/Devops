@@ -1,0 +1,55 @@
+1}  build and get code from github:-
+
+just take code from git and paste that index.html file to the /opt
+
+
+pipeline {
+    agent {
+        label 'ansible'
+    }
+
+    stages {
+        stage ('git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/harshadgithub007/ansible_project.git'
+            }
+        }
+        stage ('copy') {
+            steps {
+                sh 'scp -r /home/ubuntu/jenkins/workspace/project1/index.html /opt'
+            }
+        }
+    }
+}
+****************************************************************************************************************************************************************************************************************
+
+2} now run the ansible playbook on our jenkins agent on which ansible is installed and in the playbook we have written the following:-
+
+ubuntu@ip-172-31-5-107:~/sourcecode$ cat deploy.yml
+---
+  - name: deploy to tomcat9
+    hosts: all
+    tasks:
+      - name: deployment
+        copy:
+          src: /opt/index.html
+          dest: /home/ubuntu/tomcat9/apache-tomcat-10.1.15/webapps
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+pipeline:-
+
+pipeline {
+    agent {
+        label 'ansible'
+    }
+    stages {
+        stage ('copy') {
+            steps {
+                sh 'ansible-playbook /home/ubuntu/sourcecode/deploy.yml -i /home/ubuntu/inventry.yml '
+            }
+        }
+    }
+} 
+
+****************************************************************************************************************************************************************************************************************
