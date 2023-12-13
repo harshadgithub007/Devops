@@ -1,0 +1,58 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+    stages {
+        stage ('git_checkout') {
+            steps {
+                git 'https://github.com/RitheeshBaradwaj/JenkinsPipeline.git'
+            }
+        }
+        stage ('create_env') {
+            steps {
+                sh 'python3 -m venv venv'
+            }
+        }
+        stage ('activate_env') {
+            steps {
+                sh '. "/var/lib/jenkins/workspace/buiild and send artifects to s3/venv/bin/activate"'
+            }
+        }
+        stage ('install_dependancies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+        stage ('unittest') {
+            steps {
+                sh 'python3 -m unittest discover -s . -p "test*.py"'
+            }
+        }
+        stage ('python_build') {
+            steps {
+                 sh 'python3 /var/lib/jenkins/workspace/buiild_and_send_artifects_to_s3/venv/lib/python3.10/site-packages/pkg_resources/tests/data/my-test-package-source/setup.py sdist'
+            }
+        }
+        stage ('send_artifacts_to_s3_bucket') {
+            steps {
+                script {
+                    sh 'aws s3 cp /var/lib/jenkins/workspace/buiild_and_send_artifects_to_s3/dist/my-test-package-1.0.tar.gz s3://mybucket-jogi008/'
+                }
+            }
+        }
+    }
+    post {
+    success {
+        emailext body: '''
+                 "BUILD by Harshad (DevOps Engineer)
+                  Build_Status:- ${BUILD_STATUS}
+                  Build_Number:- ${BUILD_NUMBER}
+                  Console_Output:- ${BUILD_URL}
+            ''',
+            recipientProviders: [developers()],
+            subject: 'BUILD_INFO',
+            to: 'iamharshad108@gmail.com'
+    }
+}
+
+}
