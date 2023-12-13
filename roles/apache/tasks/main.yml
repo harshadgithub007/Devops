@@ -1,0 +1,6 @@
+---
+# tasks file for apache web server:-
+
+ - include: install.yml
+ - include: configure.yml
+ - include: service.yml 
