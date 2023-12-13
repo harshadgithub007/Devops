@@ -25,6 +25,11 @@ pipeline {
 
 2} now run the ansible playbook on our jenkins agent on which ansible is installed and in the playbook we have written the following:-
 
+inventryfile:- ---------------->     inventry.yml
+                                     [web]
+                                     ip_address_of_the_host_server
+                                     
+
 ubuntu@ip-172-31-5-107:~/sourcecode$ cat deploy.yml
 ---
   - name: deploy to tomcat9
