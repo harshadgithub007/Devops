@@ -16,22 +16,26 @@ pipeline {
         stage('activate_venv') {
             steps {
                 sh '. /var/lib/jenkins/workspace/first_python/venv/bin/activate'
+                // path of venv dir here . means venv dir is in current dir
             }
         }
         stage('install_dependancies') {
             steps {
                 sh 'pip install -r requirements.txt'
+                // path of requirements.txt
             }
         }
         stage('python_test') {
             steps {
                 // sh 'python3 -m pytest'
                 sh 'python3 -m unittest discover -s /var/lib/jenkins/workspace/first_python -p "test*.py"'
+                // path of test.py 
             }
         }
         stage('python_build') {
              steps {
                 sh 'python3 /var/lib/jenkins/workspace/first_python/venv/lib/python3.10/site-packages/pkg_resources/tests/data/my-test-package-source/setup.py sdist'
+                // path of setup.py 
                 // in sdist dir tar.gz file is created after this step
             }   
         }

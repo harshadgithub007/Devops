@@ -17,7 +17,7 @@
 # $@ :- complete list of aurgument
 # $# :- total number of parameters
 # $$ :- process id of the script
-# $? :- exit code of the script
+# $? :- exit code of the script or command--------> 0 = success and other = error and command or script failed
 
 #"************ do not press enter before giving the path aurgument ********************************************************************************************************************"
 
