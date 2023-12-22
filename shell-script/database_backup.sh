@@ -38,3 +38,4 @@ what we need to write in script to take the backup:-
 2. we have to create backup directory ------ and give its path here
 3. Location where we send our backup file like AWS S3 Bucket
 4. write command to delete file from our server after backup is done.
+'
