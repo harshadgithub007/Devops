@@ -1,0 +1,14 @@
+---
+# task to configure the apache httpd server
+#
+ - name: sending the configuration file of apache httpd
+   copy:
+    src: httpd.conf
+    dest: /etc/httpd/conf/httpd.conf
+   notify:  
+     - restart apache service
+
+ - name: sending one sample index.html file
+   copy:
+    src: index.html
+    dest: /var/www/html/index.html
