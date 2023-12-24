@@ -1,0 +1,59 @@
+If your frontend application is running on NGINX, and your backend is running on Apache HTTP Server (httpd), and both are on different servers, you can configure NGINX to act as a reverse proxy for the Apache backend. Here's how you can set up the NGINX and Apache configurations.
+
+NGINX Configuration (Frontend):-
+
+Assuming NGINX is serving your frontend and is running on Server A:-
+
+server {
+    listen 80;
+    server_name your_frontend_domain.com;
+
+    location / {
+        proxy_pass http://backend_server_b_ip:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # Additional proxy settings as needed
+    }
+
+    # Additional configuration for assets, etc.
+}
+
+In this configuration:
+
+Requests to the root path / are proxied to the backend running on Server B's IP address (backend_server_b_ip) and port 8080.
+
+***********************************************************************************************************************************************************************
+Apache HTTP Server Configuration (Backend):
+Assuming Apache HTTP Server is serving your backend and is running on Server B:-
+
+Make sure Apache is configured to listen on the specified port (e.g., 8080). You can adjust this in the Apache configuration file (httpd.conf).
+
+If Apache is not configured to accept connections from other servers, you might need to adjust the Apache configuration to allow traffic from Server A. This is typically done using the Allow and Require directives in the Apache configuration:-
+
+In your Apache configuration file (httpd.conf or a virtual host configuration file), you might have:-
+
+Listen 8080
+<VirtualHost *:8080>
+    ServerName your_backend_domain.com
+    DocumentRoot /path/to/your/backend
+
+    # Additional configuration for Apache backend
+</VirtualHost>
+
+
+Notes:
+Replace your_frontend_domain.com and your_backend_domain.com with your actual domain names.
+Replace backend_server_b_ip with the actual IP address of Server B.
+Adjust the ports and paths based on your actual setup.
+
+Running the Setup:
+Restart NGINX on Server A after updating the configuration: sudo service nginx restart.
+Restart Apache HTTP Server on Server B after updating the configuration: sudo service httpd restart.
+Make sure both servers are reachable from the internet, and the necessary ports are open. Adjust your firewall settings if needed. Also, consider securing your setup with HTTPS, especially for production environments.
+
+***********************************************************************************************************************************************************************
+
+
+
+
