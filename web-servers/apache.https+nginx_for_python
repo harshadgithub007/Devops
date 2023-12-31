@@ -1,0 +1,60 @@
+ In this scenario, one of the web servers (either Nginx or Apache) acts as a reverse proxy, forwarding requests to the other web server, which serves the Python application.
+
+Here's a simple explanation of how you can use Nginx as a reverse proxy for Apache HTTP Server in the context of serving a Python application:-
+
+1}-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Set up Apache to run your Python application. You'll typically use a module like mod_wsgi to integrate Apache with your Python application.
+
+For example, you might have an Apache configuration file (/etc/apache2/sites-available/myapp.conf), which includes:-
+
+   <VirtualHost *:80>
+    ServerName myapp.example.com
+
+    WSGIScriptAlias / /path/to/your/python/app.wsgi
+
+    <Directory /path/to/your/python>
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+**********************************************************************************************************************
+
+sudo a2ensite myapp
+sudo systemctl restart apache2
+
+  
+2}------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Configure Nginx:
+Now, configure Nginx to act as a reverse proxy for Apache. Create an Nginx configuration file (e.g., /etc/nginx/sites-available/myapp):-
+
+server {
+    listen 80;
+    server_name myapp.example.com;
+
+    location / {
+        proxy_pass http://localhost:8080; # Assuming Apache is running on localhost:8080
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    error_log /var/log/nginx/myapp_error.log;
+    access_log /var/log/nginx/myapp_access.log;
+}
+**************************************************************************************************************************************************************************************************
+sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled
+sudo systemctl restart nginx
+
+3}------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Ensure that your firewall allows traffic on the necessary ports (usually ports 80 and 443).
+
+4}------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Access your Python application through the domain name or IP address associated with Nginx. Nginx will forward requests to Apache, which in turn serves the Python application.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
