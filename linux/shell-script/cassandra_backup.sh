@@ -1,18 +1,32 @@
-#!/usr/bin/bash
+#! /usr/bin/bash
 
 HOST="localhost"
-KEYSPACE="devops"
-SNAPSHOT_NAME="devops_$(date +%Y%m%d_%H%M%S)"
-SNAPSHOT_DIR="/home/backup/$SNAPSHOT_NAME"
+KEYSPACE="devops" # Database name
+SNAPSHOT="cassandra_backup"
+SNAPSHOT_DIR="/root/cassandra_backup"
 
-# Taking snapshot (backup):
-nodetool snapshot -t "$SNAPSHOT_NAME" "$KEYSPACE"
+LOCATION="my_bucket_007"
 
-# Compress backup file:
-tar -czf "$SNAPSHOT_NAME.tar.gz" -C "/var/lib/cassandra/data/keyspace/$KEYSPACE" "$SNAPSHOT_NAME"
+# Taking backup:
+nodetool snapshot -t "$SNAPSHOT" "$SNAPSHOT_DIR/$KEYSPACE"
+
+# Check if nodetool snapshot was successful
+if [ $? -ne 0 ]; then
+    echo "Nodetool snapshot failed..."
+    exit 1
+fi
 
 # Sending to S3:
-aws s3 cp "$SNAPSHOT_NAME.tar.gz" s3://my-bucket/backup_folder/
+aws s3 cp "$SNAPSHOT_DIR/$KEYSPACE" s3://"$LOCATION"/
+
+# Check if AWS S3 upload was successful
+if [ $? -ne 0 ]; then
+    echo "AWS S3 upload failed..."
+    exit 1
+fi
 
 # Remove from local:
-rm -rf "$SNAPSHOT_DIR" "$SNAPSHOT_NAME.tar.gz"
+rm -rf "$SNAPSHOT_DIR/$KEYSPACE"
+
+# Confirm completion
+echo "Backup completed successfully."
