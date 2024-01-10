@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    
+    environment {
+        DOCKERHUB_CREDENTIALS= credentials('dockerhub_cred')
+    }
+    
+    stages {
+        stage ('create_env') {
+            steps {
+                sh 'python3 -m venv venv'
+            }
+        }
+        stage ('start_env') {
+            steps {
+                script {
+                    sh '''
+                    ls -la /var/lib/jenkins/workspace/python_app_1/venv/bin
+                    source venv/bin/activate
+                    '''
+                }
+            }
+        }
+        stage ('build') {
+            steps {
+                sh 'python3 python_app.py'
+            }
+        }
+        stage ('docker_build_image') {
+            steps {
+                script {
+                 sh 'docker build -t python .'
+                }
+            }
+        }
+        stage ('giving_tag') {
+            steps {
+                script {
+                    sh 'docker image tag python:latest harshad1008/python:101'
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub_cred', passwordVariable: 'harshad108', usernameVariable: 'harshad1008')]) {
+                    sh 'docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}'
+                    sh 'docker push harshad1008/python:101'
+                }
+            }
+        }
+    }
+}
+}
