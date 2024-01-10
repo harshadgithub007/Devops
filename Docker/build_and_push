@@ -37,7 +37,6 @@ pipeline {
             steps {
                 script {
                     sh 'docker image tag python:latest harshad1008/python:101'
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub_cred', passwordVariable: 'harshad108', usernameVariable: 'harshad1008')]) {
                     sh 'docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}'
                     sh 'docker push harshad1008/python:101'
                 }
