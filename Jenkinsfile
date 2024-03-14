@@ -5,7 +5,7 @@ pipeline {
         string(name: 'DOC_USER', description: 'Docker username')
         string(name: 'DOC_PASS', description: 'Docker password', defaultValue: '', /* no password attribute */)
     }
-    
+
     stages {
         stage('clone_repo') {
             steps {
