@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'DOC_USER', description: 'Docker username')
-        string(name: 'DOC_PASS', description: 'Docker password', defaultValue: '', password: true)
+        string(name: 'DOC_PASS', description: 'Docker password', defaultValue: '', /* no password attribute */)
     }
     
     stages {
