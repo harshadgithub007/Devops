@@ -12,5 +12,8 @@ pipeline {
                 sh 'python3 python_app'
             }
         }
+        stage ('print build url') {
+            steps {
+                sh 'echo $JENKINS_URL'
     }
 }
