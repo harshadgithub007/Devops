@@ -1,0 +1,64 @@
+This playbook performs the following steps:
+
+Installs prerequisites (apt-transport-https and OpenJDK 11).
+Imports the Elasticsearch GPG key.
+Adds the Elasticsearch APT repository.
+Installs Elasticsearch.
+Enables and starts the Elasticsearch service.
+Adds the Kibana APT repository.
+Installs Kibana.
+Enables and starts the Kibana service.
+
+***********************************************************************************************************************************
+
+
+---
+- name: Install Elasticsearch and Kibana
+  hosts: your_target_node
+  become: true
+
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - apt-transport-https
+        - openjdk-11-jre-headless
+
+    - name: Import Elasticsearch GPG key
+      apt_key:
+        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+
+    - name: Add Elasticsearch APT repository
+      apt_repository:
+        repo: deb https://artifacts.elastic.co/packages/{{ your_elasticsearch_version }}/apt stable main
+        state: present
+
+    - name: Install Elasticsearch
+      apt:
+        name: elasticsearch
+        state: present
+
+    - name: Enable and start Elasticsearch service
+      systemd:
+        name: elasticsearch
+        enabled: yes
+        state: started
+
+    - name: Add Kibana APT repository
+      apt_repository:
+        repo: deb https://artifacts.elastic.co/packages/{{ your_kibana_version }}/apt stable main
+        state: present
+
+    - name: Install Kibana
+      apt:
+        name: kibana
+        state: present
+
+    - name: Enable and start Kibana service
+      systemd:
+        name: kibana
+        enabled: yes
+        state: started

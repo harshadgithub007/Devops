@@ -1,0 +1,15 @@
+
+
+**** If Crontab Is Not Working Write This Following ENV Variables And Then Write The Crontab ****
+
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+
+
+
+* * * * * /root/shell_script/crontab_service_start_docker_when_down.sh > /dev/null
+
+*/1 * * * * /root/mysql_backup.sh >> /var/log/mysql_backup.log 2>&1
+
