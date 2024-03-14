@@ -1,0 +1,13 @@
+# Dockerfile for set up mysql
+
+FROM mysql:8.0-debian
+MAINTAINER /app
+WORKDIR /app_sql
+COPY . .
+RUN apt-get update
+ENV MYSQL_ROOT_PASSWORD=1234
+ENV MYSQL_DATABASE=MY_DATA_BASE
+ENV MYSQL_USER=HARSHAD
+ENV MYSQL_PASSWORD=5678
+EXPOSE 3306
+CMD ["mysqld"]       #no need of command as MySQL is configured to start automatically.

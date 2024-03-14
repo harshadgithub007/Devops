@@ -1,0 +1,16 @@
+FROM jenkins:latest
+
+WORKDIR /app
+
+# Copy the contents of the current directory into the container
+COPY . .
+
+# Install OpenJDK 11
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jdk
+
+# Expose the default Jenkins port
+EXPOSE 8080
+
+# Start Jenkins using the command
+CMD ["java", "-jar", "jenkins.war"]

@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage ('list') {
+            steps {
+                script {                          // use script option to execute the multiple commands after login to remote server by ssh
+                    sh 'ssh ubuntu@3.7.16.194'
+                    sh 'ls -l /home/ubuntu'
+		    // other commands
+                }
+            }
+        }
+    }
+}

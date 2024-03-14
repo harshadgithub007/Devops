@@ -1,0 +1,45 @@
+#! /usr/bin/bash
+
+# required:- for loop, command line aurguments and exit status
+
+: '
+for variable in list
+do
+	command
+done
+
+*********************************************************************************
+
+exit status:-   every command in linux has the exit status
+	   :-	command ends with the exit status zero (0) is successful command
+	   :-	a non-zero exit status from (1-255) is failure of the command
+	   :-   command is not found exit status is 127
+	   :-   command is found but not execitable exit status is 126
+know exit status os command :-  command and then echo $?
+
+*************************************************************************
+
+$0 ---------> shell script name
+$1...$n ----> positional aurgurments
+$@ ---------> values of the aur that passed (useful whn we dont know no of aur got passed)
+$# ---------> total no of aur passed ( useful for loop concept)
+$$ ---------> know proccess ID of current shell
+$? and $! --> exit status ID and proccess ID of the last command
+
+***********************************************************************************
+
+command id -u :- gives user ID //   to call in script :- $(id -u)
+
+'
+
+echo "shell script name:- $0"
+echo "my name:- $1"
+echo "my surname:- $2"
+echo "my village name:- $3"
+
+if [ $# -eq 0 ]
+then
+	echo "no any aurguments are provided"
+else
+	echo "total aur passed are:- $#"
+fi

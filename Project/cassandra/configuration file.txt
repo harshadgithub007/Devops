@@ -1,0 +1,68 @@
+cluster_name: 'YourClusterName'
+listen_address: your_cassandra_node_ip
+rpc_address: your_cassandra_node_ip
+endpoint_snitch: GossipingPropertyFileSnitch
+
+
+
+
+*********** cassandra.yml file *************
+
+
+# Cluster Name
+cluster_name: 'MyCluster'
+
+# Listen Address and RPC Address
+listen_address: localhost
+rpc_address: localhost
+
+# Seed Nodes
+seed_provider:
+  - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+    parameters:
+      - seeds: "127.0.0.1"
+
+# Data Storage Configuration
+data_file_directories:
+  - /var/lib/cassandra/data
+
+# Commit Log Configuration
+commitlog_directory: /var/lib/cassandra/commitlog
+
+# Caching Configuration
+saved_caches_directory: /var/lib/cassandra/saved_caches
+
+# Partitioner and Cluster Name
+partitioner: org.apache.cassandra.dht.Murmur3Partitioner
+
+# Endpoint Snitch
+endpoint_snitch: GossipingPropertyFileSnitch
+
+# Security Configuration (Optional)
+authenticator: PasswordAuthenticator
+authorizer: CassandraAuthorizer
+
+# Memory Configuration
+# Heap Settings
+heap_newsize: 800M
+heap_size: 2048M
+
+# Tuning and Performance
+concurrent_reads: 32
+concurrent_writes: 32
+
+# Compaction Strategy
+compaction:
+  enabled: true
+  class_name: SizeTieredCompactionStrategy
+
+# Gossiping and Snitch Configuration
+gossiping_property_file_snitch:
+  dc_suffix: us-east-1
+
+# SSL/TLS Configuration (Optional)
+client_encryption_options:
+  enabled: true
+  keystore: conf/.keystore
+  keystore_password: cassandra
+  require_client_auth: false

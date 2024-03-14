@@ -1,0 +1,79 @@
+
+The nginx.conf file in Nginx is the main configuration file, and it consists of various directives that control the behavior of the Nginx web server. Below are some of the commonly used directives in an Nginx configuration file:
+
+1} Main Context:
+
+	worker_processes: Sets the number of worker processes.
+
+	error_log: Defines the error log file and logging level.
+
+2} Events Context:
+
+	events: Configures the event module.
+
+3} HTTP Context:
+
+	http: Configures the HTTP server.
+
+	server: Defines a virtual server.
+
+	location: Defines a location within a server.
+
+	include: Includes another file.
+
+	default_type: Sets the default MIME type.
+
+	index: Defines the default index file.
+
+	autoindex: Enables or disables directory listing.
+
+	error_page: Defines custom error pages.
+
+	access_log: Configures access logging.
+
+4} Types Context:
+
+	types: Defines MIME types.
+
+	include mime.types: Includes the default MIME types file.
+
+5} Server Context:
+
+
+	listen: Configures the listening address and port.
+
+	server_name: Defines the server's name.
+
+	location : Defines a location within a server block.
+
+	root: Sets the document root.
+
+	index: Defines the default index file.
+
+	try_files: Specifies a set of files to try in a specified order.
+
+7} Location Context:
+
+	location: Defines how to process requests for a specific location.
+
+	alias: Creates an internal alias.
+
+	rewrite: Defines URL rewriting.
+
+	proxy_pass: Sets the address of a proxied server.
+
+	proxy_set_header: Sets headers passed to a proxied server.
+
+	proxy_redirect: Sets the text in a redirected "Location" header field.
+
+8} SSL Context:
+
+	ssl: Configures SSL settings.
+
+	ssl_certificate: Specifies the path to the SSL certificate file.
+
+	ssl_certificate_key: Specifies the path to the SSL certificate key file.
+
+9} Security Context:
+
+	server_tokens: Enables or disables the server version in error messages.

@@ -1,0 +1,46 @@
+
+****************************************************************************************************************************************************************************************
+
+Compress files are directories:-
+
+1} compress only:-                              "-= gzip command =-"
+
+	gzip "file.txt" -------------------> file.txt.gz will be created.
+
+2} de-compress file:-
+
+	gzip -d file.txt.gz / gunzip file.txt.gz---------------> file.txt 
+
+3} compress all files in directory:- 
+
+	gzip -r directory_name --------------> 
+
+4} compress files with keeping orignal file as it is:-
+
+	gzip -k file.txt
+
+5} to check how much files is compressed (compression ratio):-
+
+	gzip -l file.txt.gz
+****************************************************************************************************************************************************************************************
+
+Archive files and directory:-                  "-= tar command =-"
+
+1} archive files or directories:-
+	tar -cvf filename_we_want_to_create.tar file_or_directory_we_want_to_archive
+
+2} compress the archived file:-
+	gzip archived_file.tar -------------------------------------> file.tar.gz will be created
+
+3} restore/retrive/extract the archived and compressed file:-
+	tar -xvf file.tar.gz ----------------------> same name folder will be created which was archived and compressed
+
+4} Archived and Compress file or directory at the same time:-
+
+	tar -zcvf file_name_we_want_as_archived_and_compress.tar.gz file_or_directory_name_to_be_archived_and_compress
+
+5} extract and decompress the file at the same time this:-
+	
+	tar -xcvf file.tar.gz
+****************************************************************************************************************************************************************************************
+	
