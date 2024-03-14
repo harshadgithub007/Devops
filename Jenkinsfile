@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     parameters {
-        string (name: DOC_USER, description: 'docker_username')
-        string (name: DOC_PASS, description: 'docker_password", deaultValue: '', password: true)
+        string(name: 'DOC_USER', description: 'Docker username')
+        string(name: 'DOC_PASS', description: 'Docker password', defaultValue: '', password: true)
+    }
     
     stages {
         stage('clone_repo') {
@@ -21,8 +22,10 @@ pipeline {
                 sh 'echo $BUILD_URL'
             }
         }
-        stage ('docker login') {
+        stage('docker login') {
             steps {
-                sh 'docker login -u ${params.DOC_USER} -p ${params.DOC_PASS}'
+                sh "docker login -u ${params.DOC_USER} -p ${params.DOC_PASS}"
+            }
+        }
     }
 }
