@@ -14,7 +14,7 @@ pipeline {
         }
         stage('print build url') {
             steps {
-                sh 'echo $JENKINS_URL'
+                sh 'echo $BUILD_URL'
             }
         }
     }
