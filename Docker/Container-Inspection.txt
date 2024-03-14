@@ -1,0 +1,14 @@
+
+docker ps	----------------------------------->Lists all running containers
+
+docker -ps -a	----------------------------------->Lists all containers
+
+docker diff container	--------------------------->Inspects changes to directories and files in the container filesystem
+
+docker top container	 -------------------------->Shows all running processes in an existing container
+
+docker inspect container	------------------->Displays low-level information about a container
+
+docker logs container	--------------------------->Gathers the logs for a container
+
+docker stats container	--------------------------->Shows container resource usage statistics

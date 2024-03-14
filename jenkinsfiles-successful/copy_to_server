@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('copy_to_ansible') {
+            steps {
+                script {
+                    // Assuming you have SSH key authentication set up
+                    sh 'scp /var/lib/jenkins/ansible.txt ubuntu@15.206.186.93:/home/ubuntu'
+                }
+            }
+        }
+    }
+}

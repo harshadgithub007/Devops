@@ -1,0 +1,9 @@
+tickTime=2000
+dataDir={{ zookeeper_data_dir }}
+clientPort=2181
+initLimit=5
+syncLimit=2
+server.1={{ ansible_host }}:2888:3888
+server.2=node2_ip:2888:3888
+server.3=node3_ip:2888:3888
+server.4=node4_ip:2888:3888

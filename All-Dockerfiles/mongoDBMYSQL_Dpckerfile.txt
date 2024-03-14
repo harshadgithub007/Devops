@@ -1,0 +1,10 @@
+FROM mongo:2.0.1
+MAINTAINER harshadj@gmail.com
+COPY . .
+ENV MONGO_ROOT_PASWWORD=1234 \
+    MONGO_DATABASE_NAME=MY_MONGO_DB \
+    MONGO_USER=HARSHAD \
+    MONGO_PASSWORD=5678
+EXPOSE 27017
+# CMD instruction is left blank since MongoDB is configured to start automatically in the base image
+CMD []

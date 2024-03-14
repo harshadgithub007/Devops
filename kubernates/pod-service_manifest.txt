@@ -1,0 +1,43 @@
+# Example Pod and Service Manifests
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: my-registry/my-image:dev
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: my-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
+
+********************************************************************************************************************************************************************************************
+During development or testing stages, you may choose to create Pods and Services directly.
+This approach provides simplicity and is often used for quick iterations and troubleshooting in early stages.
+Example scenarios include local development environments, testing, or when you need more direct control over individual components.
+
+During the development or UAT stage, developers and testers may use simpler configurations to deploy and test individual components.
+Directly creating Pods and Services can provide more straightforward setup and troubleshooting during the early stages.
+Rapid changes and quick iterations are often a priority.
+
+******************************************************************************************************************************************************************************************
+
+So, in summary, manifest files are a way to declare and configure your Kubernetes resources, and the choice between Pod and Service manifests versus Deployment manifests depends on the stage and requirements of your project.
+
+
+
+
+
+

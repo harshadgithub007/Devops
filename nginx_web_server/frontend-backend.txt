@@ -1,0 +1,46 @@
+1. Serve Frontend with NGINX:-
+
+Assuming your frontend code (HTML, CSS, JavaScript) is in a directory like /var/www/frontend, you can configure NGINX to serve it:
+
+server {
+    listen 80;
+    server_name your_domain.com;
+
+    location / {
+        root /var/www/frontend;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Additional configuration for assets, etc.
+}
+
+
+Replace your_domain.com with your actual domain or IP address.
+
+***********************************************************************************************************************************************************************
+
+2. Proxy Requests to Python Backend:-
+
+Assuming your Python backend is running on 127.0.0.1:8000, you can proxy requests to it using NGINX:-
+
+server {
+    listen 80;
+    server_name your_domain.com;
+
+    location / {
+        root /var/www/frontend;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # Additional proxy settings as needed
+    }
+}
+
+In this example, requests to /api are proxied to http://127.0.0.1:8000. Adjust the paths and ports based on your actual setup.

@@ -1,0 +1,41 @@
+
+
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+
+
+
+<VirtualHost 192.168.1.1:80>
+    ServerName your-domain.com
+
+    # ProxyPass for Backend Server 1
+    ProxyPass /app1/ http://backend-server1-ip/
+    ProxyPassReverse /app1/ http://backend-server1-ip/
+
+    # ProxyPass for Backend Server 2
+    ProxyPass /app2/ http://backend-server2-ip/
+    ProxyPassReverse /app2/ http://backend-server2-ip/
+
+    # Add more ProxyPass directives as needed for additional backend servers
+
+</VirtualHost>
+
+
+
+........................................or.................................
+
+
+<VirtualHost *:80>
+    ServerName your-domain.com
+
+    # ProxyPass for Backend Server 1
+    ProxyPass /app1/ http://backend-server1-ip/
+    ProxyPassReverse /app1/ http://backend-server1-ip/
+
+    # ProxyPass for Backend Server 2
+    ProxyPass /app2/ http://backend-server2-ip/
+    ProxyPassReverse /app2/ http://backend-server2-ip/
+
+    # Add more ProxyPass directives as needed for additional backend servers
+
+</VirtualHost>
