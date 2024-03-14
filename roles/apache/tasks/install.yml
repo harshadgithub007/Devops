@@ -1,9 +1,0 @@
----
-# task to install the apache on host
-
-- name: install httpd package
-  yum:
-   name: httpd
-   state: latest
-
-  

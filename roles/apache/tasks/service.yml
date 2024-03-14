@@ -1,8 +1,0 @@
----
-# program to start the apache service
- 
- - name: start the apache service
-   service:
-     name: httpd
-     state: started
-
