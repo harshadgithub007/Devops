@@ -1,8 +1,0 @@
----
-- name: pull docker image
-  hosts: all docker clients
-  tasks:
-    - name: code to pull docker image
-      docker_image:
-        name: alpine
-        source: pull

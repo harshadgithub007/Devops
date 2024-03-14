@@ -1,9 +1,0 @@
-- name: code to build the docker image
-  hosts: client name
-  tasks: 
-    - name: build
-      docker_image:
-        build:
-            path: .    #or path of the dockerfile
-            tag: latest
-            
