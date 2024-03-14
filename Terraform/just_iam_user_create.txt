@@ -1,4 +1,0 @@
-resource "aws_iam_user" "lb" {
-  name = "cloud_user_terraform"
-  path = "/system/"
-}
