@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Configuration
+CASSANDRA_HOME="/path/to/cassandra"  # Set the path to your Cassandra installation
+BACKUP_DIR="/path/to/backup/directory"
+KEYSPACE="your_keyspace_name"  # Replace with the name of your keyspace
+
+# Create backup directory if it doesn't exist
+mkdir -p "$BACKUP_DIR"
+
+# Take Cassandra snapshot
+echo "Taking Cassandra snapshot..."
+"$CASSANDRA_HOME/bin/nodetool" -h localhost -p 7199 snapshot -t "backup_$(date +%Y%m%d%H%M%S)" -c "$KEYSPACE"
+
+# Copy snapshot files to backup directory
+echo "Copying snapshot files to backup directory..."
+cp -r "$CASSANDRA_HOME/data/$KEYSPACE/snapshots/"* "$BACKUP_DIR"
+
+echo "Backup completed successfully."
+
+
+
+*****************************************************************************************************************************************************************************************
+backup to s3:-
+
+
+#!/bin/bash
+
+# S3 Configuration
+S3_BUCKET="your-s3-bucket"
+S3_PATH="cassandra-backups"
+LOCAL_BACKUP_DIR="/path/to/cassandra/data/your_keyspace_name/snapshots"
+
+# List Snapshot Directories
+SNAPSHOT_DIRS=$(ls "$LOCAL_BACKUP_DIR")
+
+# Copy Snapshot to S3
+for DIR in $SNAPSHOT_DIRS
+do
+  aws s3 cp "$LOCAL_BACKUP_DIR/$DIR" "s3://$S3_BUCKET/$S3_PATH/$DIR" --recursive
+done
+
+

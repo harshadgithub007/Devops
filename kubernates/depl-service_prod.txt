@@ -1,0 +1,47 @@
+# Example Deployment and Service Manifests
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-container
+        image: my-registry/my-image:production
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: my-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+*****************************************************************************************************************************************************************************************
+Deployments provide additional benefits such as rolling updates, rollbacks, and scaling capabilities.
+In production, it's common to use Deployments to manage the lifecycle of your application, ensuring high availability and reliability.
+
+As your project moves towards production, you might transition to using Deployments for managing the application lifecycle.
+Deployments offer features like rolling updates, rollbacks, and scaling, making them valuable for production scenarios.
+You still use Services to expose your application components in both development and production stages.
+
+******************************************************************************************************************************************************************************************
+So, in summary, manifest files are a way to declare and configure your Kubernetes resources, and the choice between Pod and Service manifests versus Deployment manifests depends on the stage and requirements of your project.
+
+
+
+
+

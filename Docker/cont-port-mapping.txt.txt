@@ -1,0 +1,21 @@
+1. Expose Port in Dockerfile: In your Dockerfile, you can use the EXPOSE instruction to inform Docker that the container will listen on the specified network ports at runtime. However, using EXPOSE alone does not actually publish the specified ports; it serves as a form of documentation.:---------->
+
+                    FROM your_base_image
+                    # Expose port 7070
+                    EXPOSE 7070
+
+                    # Other Dockerfile instructions...
+
+
+2. docker container port mapping:-------------->
+
+                   docker run -p host_port:container_port your_image
+
+                   docker run -p 6060:7070 your_image
+
+
+3. we have to make sure that both the ports are added to the firewall of the server
+
+4. access the container:----------------->
+
+                   http://your_server_ip:6060

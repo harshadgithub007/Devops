@@ -1,0 +1,22 @@
+pipeline {
+     agent any
+     stages {
+         stage('Build') { //optional steps
+             steps {
+                 sh 'echo "Hello World"'
+                 sh '''
+                     echo "Multiline shell steps works too"
+                     ls -lah
+                 '''
+             }
+         }      
+         stage('Upload to AWS') {
+              steps {
+                  withAWS(region:'ap-south-1',credentials:'88fefdaf-b1f6-4785-a679-2720f4efeb9f') { //put your aws credential ID
+                  sh 'echo "Uploading content with AWS creds"'
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'/home/ubuntu/file.pdf', bucket:'mynewbucket-0007')
+                  }
+              }
+         }
+     }
+}

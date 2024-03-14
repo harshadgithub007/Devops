@@ -1,0 +1,60 @@
+pipeline {
+    agent {
+        label 'docker'
+    }
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('docker_hub')
+        IMAGE_NAME = 'doc_pro_one'
+        IMAGE_TAG = 'latest'
+    }
+
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'  // doc_pro_one:latest is image name
+                }
+            }
+        }
+
+        stage('Tag Docker Image') {
+            steps {
+                script {
+                    sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} username_0f_registry/${IMAGE_NAME}:${BUILD_NUMBER}"
+                      // tag will be:- harshad1008/doc_pro_one:latest
+                }
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                script {
+                    echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
+                }
+            }
+        }
+
+        stage('Push Image to Docker Hub') {
+            steps {
+                script {
+                    sh "docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                sh 'docker logout'
+            }
+        }
+    }
+}

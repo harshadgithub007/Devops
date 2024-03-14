@@ -1,0 +1,37 @@
+
+1. aws s3 mb s3://your-bucket-name ------------to create the bucket
+
+2. aws s3 ls ------------ to list the buckets
+
+3. aws s3 cp /path/to/local/file.txt s3://your-bucket-name/ ------------------uploade file to s3 bucket
+
+4. aws s3 cp /path/to/local/directory/ s3://your-bucket-name/ --recursive ------------------upload all file of the directory
+
+5. aws s3 cp s3://your-bucket-name/file.txt /path/to/local/ -------------------download file from bucket
+
+6. aws s3 cp s3://your-bucket-name/ /path/to/local/directory/ --recursive ------------------- download all files from the bucket
+
+7. aws s3 cp s3://your-bucket-name/file.txt /path/to/local/ ----------------- download one file from bucket
+
+8. aws s3 sync /path/to/local/directory/ s3://your-bucket-name/ ----------------- sync local directory into the bucket
+
+9. aws s3 rm s3://your-bucket-name/file.txt ------------------- delete file from the bucket
+
+10. aws s3 rm s3://your-bucket-name/ --recursive --------------- delete all files from the bucket
+
+11. aws s3 ls s3://your-bucket-name/ ------------- list objects from perticular bucket
+
+12. aws s3api head-object --bucket your-bucket-name --key file.txt ------------------------ get info about the object from any bucket
+
+13. aws s3 cp s3://source-bucket/source-file.txt s3://destination-bucket/destination-file.txt ------------------ copy objects from one bucket to another bucket
+
+14. aws s3 presign s3://your-bucket-name/file.txt ------------------ presign url for object { temporary } 
+
+
+
+
+
+
+
+
+

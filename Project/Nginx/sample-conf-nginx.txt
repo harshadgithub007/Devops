@@ -1,0 +1,16 @@
+
+http {
+
+    include mime.types;
+
+    server {
+        listen 8080;
+        root /etc/nginx/web
+
+        location /fruits {
+            root /etc/nginx/web
+        }
+    }
+}
+
+events {}
