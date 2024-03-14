@@ -1,0 +1,59 @@
+
+
+1. git fetch origin/branch_name    -----> pull changes but does not merge automatically with local branch like git pull
+
+2. git merge origin/branch_name -----> to merge the changes after git fetch
+
+3. git log -------> see logs,commit history
+
+4. git log origin/branch_name -----> see commits on remote branch
+
+5. git stash -----> use to save the changes to working/stagging area of current branch if we want to move to the other branch in the middle of the work
+
+6. git stash apply ------> after comming to the old branch start from where you left your work in the middle 
+
+7. git log --oneline ----------> show only commit hash and commit message
+
+8. git reflog -----------> shows chronological updates and HEAD movements and other git oprations
+
+9. git diff ----> shows changes verious commits, stagging area, working area, etc
+
+10. git diff commitID commitID ---------> show changes made to the specific file and specific commit
+
+11. git diff --staged ------> shows changes are in stagging area but not yet commited
+
+12. git diff filename ------------> shows changes made to the file which is in working area now (file modified)
+
+13. git diff branch1 branch2 -------> show diff between two branches
+
+14. git branch ---> create branch
+
+15. git branch -d branch_name --------> delete branch
+
+16. git checkout -b branch_name commit_hash (by git reflog ) --------> recover deleted branch from local
+
+17. git reset --hard origin/main -------------> forcefully discard the local changes and make local and remote branch same
+
+18. git reset --hard commit_hash_by_git_reflog ---------------> recover deleted commit
+
+
+
+                                  _____________________________________________________________________________________________________________________________________
+                                 |                                                                                                                                     |
+19. pull request --------------->|  1.  clone repo                                                                                                                     |
+                                 |  2.  create branch from main like say create branch named 'harshad'                                                                 |
+                                 |  3.  move on the harshad branch                                                                                                     |
+                                 |  4.  do required edits                                                                                                              |
+                                 |  5.  then git add & git commit                                                                                                      |
+                                 |  6.  then push that branch to the remote like by using "git push origin harshad"                                                    |
+                                 |  7.  then create pull request to merge changes of harshad branch to the main branch                                                 |
+                                 |  8.  if there are no conflicts in the harshad branch with main branch owner of repository will approve the pull request to merge    |
+                                 |  9.  after approving the pull request changes from harshad branch will be marged into the main branch                               |
+                                 |  10. pull request will be closed.                                                                                                   | 
+                                 |_____________________________________________________________________________________________________________________________________| 
+
+
+
+20. 
+
+
