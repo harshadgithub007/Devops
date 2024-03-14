@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string (name: DOC_USER, description: 'docker_username')
-        string (name: DOC_PASS, description: 'docker_password", deaultValue" '', password: true)
+        string (name: DOC_PASS, description: 'docker_password", deaultValue: '', password: true)
     
     stages {
         stage('clone_repo') {
