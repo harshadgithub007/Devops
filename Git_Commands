@@ -54,6 +54,49 @@
 
 
 
-20. 
+20. "git checkout -- <file_name>" ---- to discard changes in the working directory for a specific file.
+
+21. "git checkout -- ." ------------- to discard changes in all tracked files in the working directory
+
+22. "git clean ." --------------------- to clean files from working directory
+
+23. "git reset HEAD <file>" ------------- to unstage the file from stagging area
+
+24. "git reset HEAD ." ------------------- to unstage all the files from stagging area
+
+25. "git restore --staged <file>" --------- to unstage changes for a specific file
+
+26. "git revert <commit_hash>" --------------  create a new commit that undoes the changes made by the specified commit
+
+27. changes undo after wrong commit and pushed to remote :- __________________________________
+                                                            | "git reflog"                    |
+                                                            | "git revert <commit_ID>"        |
+                                                            | "git push origin <branch_name"  |
+                                                            |_________________________________|
+
+28. if files are deleted and commited but not pushed then how to recover those files:-  _____________________________________________________________
+                                                                                       | "git reflog" to get the commit hash where file were present |
+                                                                                       | "git checkout <commit_hash> -- ."                           |
+                                                                                       |_____________________________________________________________|
 
 
+29. "git branch -r": ------------------------- list remote branches
+
+30. "git commit --amend :- ------------------------------amend the commit
+
+                                       __________________________________________________________________________________________________
+31. solve the git conflict:--------->  |  1. "git status" ------ to see which file is with conflict"                                     |
+                                       |  2. "vim <file_name>" ---- see the markers, changes on each branch will be there, decide which  |
+                                       |                            change you want to keep, delete remaing changes and markers          |
+                                       |  3. "git add <conflicted_file_name>"                                                            |
+                                       |  4. "git commit -m "Resolve merge conflict"                                                     |
+                                       |  5. "git push origin <branch_name>"                                                             |
+                                       |_________________________________________________________________________________________________|
+
+32. git rebase feature_branch main_branch:--------------------->   commits will transfer from feature_branch to main_branch seriel wise
+    [ move on branch on you want                                   so that we will have all history on main branch about all commits from
+     to get commits(main) from another branch(feature) ]           from feature branch.
+
+33. git push origin --delete <remote_branch> ------>  delete the remote branch
+
+34.git commit --amend -----------> to fix broken commit
